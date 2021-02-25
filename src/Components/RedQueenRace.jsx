@@ -4,6 +4,8 @@ import './style.css'
 
 export const RedQueenRace = () => {
 
+// console.log(useWebAnimations)
+
 //make two variable for background moving as per req
 let playbackRq=1;
 let playbackBg=0;
@@ -54,28 +56,31 @@ const spiritFrame=[
     {transform: 'translateY(-100%)'},
 ]
 //another way to write animation property below
-const redQueen_alice=useWebAnimations({
-    keyframes: spiritFrame,
-    timing:{
+const spiritTiming={
         easing: 'steps(7, end)',
         direction: "reverse",
         duration: 600,
         playbackRate: playbackRq,
         iterations: Infinity
-    }
+}
+
+const redQueen_alice=useWebAnimations({
+    keyframes: spiritFrame,
+    timing: spiritTiming,
+    
 })
 
 
 //make funtion in that inside cond
 const adjustBackgroundPlayBack=() =>{
     if(playbackRq < 0.8){
-        playbackBg=(playbackRq / 2) * -1
+        playbackBg=(playbackRq / 2) * -1;
     }else if(playbackRq > 1.2){
-        playbackBg=playbackRq / 2
+        playbackBg=playbackRq / 2;
     }else{
         playbackBg=0;
     }
-
+    console.log(playbackBg)
     forground1Movement.getAnimation().playbackRate =playbackBg;
     forground2Movement.getAnimation().playbackRate =playbackBg;
     background1Movement.getAnimation().playbackRate =playbackBg;
@@ -89,11 +94,11 @@ const adjustBackgroundPlayBack=() =>{
 // }
 
 
-useEffect(() => {
-// const fganimation=forground1Movement.getAnimation();
+useEffect(function() {
+// let fganimation=forground1Movement.getAnimation();
 // fganimation.currentTime=fganimation.effect.getTiming().duration / 2;
 
-// const bganimation=background1Movement.getAnimation();
+// let bganimation=background1Movement.getAnimation();
 // bganimation.currentTime=bganimation.effect.getTiming().duration / 2;
 
 
@@ -104,7 +109,6 @@ useEffect(() => {
 //     }
 //     adjustBackgroundPlayBack()
 // },3000)
-
 
    document.addEventListener('click',() =>{
      playbackRq  *=1.1
